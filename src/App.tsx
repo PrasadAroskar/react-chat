@@ -6,20 +6,26 @@ import ListItem from "@athena/forge/ListItem";
 import { getMessages, sendMessage } from "./api/messagesApi";
 import { SentMessage, UnsentMessage, User } from "./types";
 import { MessageForm } from "./MessageForm";
+import { DevTools } from "./DevTools";
+import { getUSers } from "./api/userApi";
 
 export function App() {
   const [messages, setMessages] = useState<SentMessage[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User>({
     id: 1,
     username: "prasadaroskar",
   });
 
   useEffect(() => {
-    async function getInitialMessages() {
+    async function getInitialData() {
+      // todo: use promise all
       const _messages = await getMessages();
+      const _users = await getUSers();
       setMessages(_messages);
+      setUsers(_users);
     }
-    getInitialMessages();
+    getInitialData();
   }, []); // Only run this once.
 
   async function handelSubmit(unsentMessage: UnsentMessage) {
@@ -32,6 +38,7 @@ export function App() {
   return (
     <Root>
       <h1>Chat</h1>
+      <h2> Hi, {user.username} </h2>
 
       <List>
         {messages.map((m, index) => (
@@ -40,6 +47,7 @@ export function App() {
       </List>
 
       <MessageForm onSubmit={handelSubmit} />
+      <DevTools users={users} />
     </Root>
   );
 }
