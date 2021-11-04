@@ -7,10 +7,21 @@ import Button from "@athena/forge/Button";
 import { useState } from "react";
 import List from "@athena/forge/List";
 import ListItem from "@athena/forge/ListItem";
+import { getMessages } from "./api/messagesApi";
+import { useEffect } from "react";
+import { SentMessage } from "./types";
 
 export function App() {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<SentMessage[]>([]);
+
+  useEffect(() => {
+    async function getInitialMessages() {
+      const _messages = await getMessages();
+      setMessages(_messages);
+    }
+    getInitialMessages();
+  }, []); // Only run this once
 
   return (
     <Root>
@@ -18,7 +29,7 @@ export function App() {
 
       <List>
         {messages.map((m, index) => (
-          <ListItem key={index}>{m}</ListItem>
+          <ListItem key={index}>{m.message}</ListItem>
         ))}
       </List>
 
@@ -26,7 +37,14 @@ export function App() {
         includeSubmitButton={false}
         onSubmit={(event) => {
           event.preventDefault();
-          setMessages([...messages, message]);
+          //   const unsavedMessage: UnsentMessage = {
+          //     date: new Date().toISOString(),
+          //     message: message,
+          //     recipientUserId: 1,
+          //     senderUserID: 2,
+          //   };
+          setMessages([...messages]);
+
           setMessage(""); // clear the message input since it was just submitted
         }}
       >
