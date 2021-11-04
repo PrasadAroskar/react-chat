@@ -30,5 +30,11 @@ describe("App", () => {
     cy.findByLabelText("Message").type("Example message");
     cy.findByRole("button", { name: "Send" }).click();
     cy.findByText("Example message");
+
+    // Delete the message that was just created using the dev tools
+    cy.findByLabelText("Message to Delete").select("Example message");
+
+    // Now make sure the delete worked. Message shouldn't display anymore
+    cy.findByText("Example message").should("not.exist");
   });
 });
