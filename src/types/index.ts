@@ -12,3 +12,8 @@ export type UnsentMessage = {
   senderUserId: number;
   recipientUserId: number;
 };
+
+export type User = {
+  id: number;
+  username: string;
+};

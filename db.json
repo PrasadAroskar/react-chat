@@ -1,21 +1,102 @@
 {
   "messages": [
     {
-      "id": 1,
-      "message": "Hi Mark",
-      "date": "2021-11-03",
-      "senderUserId": 1,
-      "recipientUserId": 2
+      "date": "2021-11-04T19:56:36.006Z",
+      "message": "How are you?",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 2
+    },
+    {
+      "date": "2021-11-04T20:31:44.338Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 3
+    },
+    {
+      "date": "2021-11-04T20:49:02.442Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 4
+    },
+    {
+      "date": "2021-11-04T20:51:02.474Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 5
+    },
+    {
+      "date": "2021-11-04T20:51:05.203Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 6
+    },
+    {
+      "date": "2021-11-04T20:55:18.086Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 7
+    },
+    {
+      "date": "2021-11-04T20:55:19.540Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 8
+    },
+    {
+      "date": "2021-11-04T20:56:03.068Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 9
+    },
+    {
+      "date": "2021-11-04T20:56:05.907Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 10
+    },
+    {
+      "date": "2021-11-04T20:57:19.249Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 11
+    },
+    {
+      "date": "2021-11-04T20:57:33.360Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 12
+    },
+    {
+      "date": "2021-11-04T21:06:32.624Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 13
     }
   ],
   "users": [
     {
       "id": 1,
-      "username": "prasad"
+      "username": "Prasad_Aroskar"
     },
     {
       "id": 2,
-      "username": "aroskar"
+      "username": "James_Bond"
+    },
+    {
+      "id": 3,
+      "username": "John_Cena"
     }
   ]
 }

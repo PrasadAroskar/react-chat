@@ -1,63 +1,77 @@
-import Form from "@athena/forge/Form";
 import Root from "@athena/forge/Root";
 import "@athena/forge/dist/forge.css";
-import Textarea from "@athena/forge/Textarea";
-import FormField from "@athena/forge/FormField";
-import Button from "@athena/forge/Button";
-import { useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import List from "@athena/forge/List";
 import ListItem from "@athena/forge/ListItem";
-import { getMessages } from "./api/messagesApi";
-import { useEffect } from "react";
-import { SentMessage } from "./types";
+import { getMessages, sendMessage } from "./api/messagesApi";
+import { SentMessage, UnsentMessage, User } from "./types";
+import { MessageForm } from "./MessageForm";
+import { getUsers } from "./api/userApi";
+
+const DevTools = React.lazy(() => import("./DevTools"));
 
 export function App() {
-  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<SentMessage[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const [user, setUser] = useState<User>({
+    id: 3,
+    username: "John_Cena",
+  });
 
   useEffect(() => {
-    async function getInitialMessages() {
-      const _messages = await getMessages();
-      setMessages(_messages);
+    async function init() {
+      const _users = await getUsers();
+      setUsers(_users);
     }
-    getInitialMessages();
-  }, []); // Only run this once
+    init();
+  }, []);
+
+  useEffect(() => {
+    async function getInitialData() {
+      // todo: use promise all
+      const _messages = await getMessages(user.id);
+      const _users = await getUsers();
+      setMessages(_messages);
+      setUsers(_users);
+    }
+    getInitialData();
+  }, [user.id]); // Only run this once.
+
+  async function handleSubmit(unsentMessage: UnsentMessage) {
+    // TODO: Handle loading state. Consider optimistic update.
+    const sentMessage = await sendMessage(unsentMessage);
+
+    setMessages([...messages, sentMessage]);
+  }
 
   return (
     <Root>
-      <h1>Chat</h1>
+      <header style={{ backgroundColor: "limegreen", padding: 14 }}>
+        <h2> Hi, {user.username} </h2>
+      </header>
 
-      <List>
-        {messages.map((m, index) => (
-          <ListItem key={index}>{m.message}</ListItem>
-        ))}
-      </List>
+      <section aria-labelledby="chat-heading" id="chat-section" role="article">
+        <h1>Chat</h1>
 
-      <Form
-        includeSubmitButton={false}
-        onSubmit={(event) => {
-          event.preventDefault();
-          //   const unsavedMessage: UnsentMessage = {
-          //     date: new Date().toISOString(),
-          //     message: message,
-          //     recipientUserId: 1,
-          //     senderUserID: 2,
-          //   };
-          setMessages([...messages]);
+        <List>
+          {messages.map((m, index) => (
+            <ListItem key={index}>{m.message}</ListItem>
+          ))}
+        </List>
 
-          setMessage(""); // clear the message input since it was just submitted
-        }}
-      >
-        <FormField
-          labelAlwaysAbove
-          labelText="Message"
-          id="message"
-          inputAs={Textarea}
-          value={message}
-          onChange={(event) => setMessage(event.currentTarget.value)}
-        />
-        <Button type="submit" text="Send" disabled={!message} />
-      </Form>
+        <MessageForm onSubmit={handleSubmit} />
+      </section>
+      <Suspense fallback="loading...">
+        {process.env.REACT_APP_SHOW_DEV_TOOLS === "Y" && (
+          <DevTools
+            users={users}
+            setUser={setUser}
+            user={user}
+            messages={messages}
+            setMessages={setMessages}
+          />
+        )}
+      </Suspense>
     </Root>
   );
 }
