@@ -8,21 +8,88 @@
       "recipientUserId": 2
     },
     {
-      "date": "2021-11-04T14:51:06.696Z",
-      "message": "hi\n",
+      "id": 2,
+      "message": "Hi Prasad, this is James",
+      "date": "2021-11-03",
+      "senderUserId": 3,
+      "recipientUserId": 1
+    },
+    {
+      "date": "2021-11-04T18:37:55.701Z",
+      "message": "Example message",
       "recipientUserId": 1,
       "senderUserId": 2,
-      "id": 2
+      "id": 3
+    },
+    {
+      "date": "2021-11-04T18:38:42.479Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 4
+    },
+    {
+      "date": "2021-11-04T18:40:50.946Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 5
+    },
+    {
+      "date": "2021-11-04T18:41:31.086Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 6
+    },
+    {
+      "date": "2021-11-04T18:41:38.030Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 7
+    },
+    {
+      "date": "2021-11-04T18:42:30.360Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 8
+    },
+    {
+      "date": "2021-11-04T18:42:51.743Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 9
+    },
+    {
+      "date": "2021-11-04T18:50:27.037Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 10
+    },
+    {
+      "date": "2021-11-04T18:57:23.923Z",
+      "message": "Example message",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 11
     }
   ],
   "users": [
     {
       "id": 1,
-      "username": "prasad"
+      "username": "Prasad_Aroskar"
     },
     {
       "id": 2,
-      "username": "aroskar"
+      "username": "James_Bond"
+    },
+    {
+      "id": 3,
+      "username": "John_Cena"
     }
   ]
 }

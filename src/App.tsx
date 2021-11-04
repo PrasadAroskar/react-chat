@@ -7,26 +7,34 @@ import { getMessages, sendMessage } from "./api/messagesApi";
 import { SentMessage, UnsentMessage, User } from "./types";
 import { MessageForm } from "./MessageForm";
 import { DevTools } from "./DevTools";
-import { getUSers } from "./api/userApi";
+import { getUsers } from "./api/userApi";
 
 export function App() {
   const [messages, setMessages] = useState<SentMessage[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User>({
-    id: 1,
-    username: "prasadaroskar",
+    id: 3,
+    username: "John_Cena",
   });
+
+  useEffect(() => {
+    async function init() {
+      const _users = await getUsers();
+      setUsers(_users);
+    }
+    init();
+  }, []);
 
   useEffect(() => {
     async function getInitialData() {
       // todo: use promise all
-      const _messages = await getMessages();
-      const _users = await getUSers();
+      const _messages = await getMessages(user.id);
+      const _users = await getUsers();
       setMessages(_messages);
       setUsers(_users);
     }
     getInitialData();
-  }, []); // Only run this once.
+  }, [user.id]); // Only run this once.
 
   async function handelSubmit(unsentMessage: UnsentMessage) {
     // TODO: Handle loading state. Consider optimistic update.

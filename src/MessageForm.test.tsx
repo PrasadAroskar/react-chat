@@ -5,8 +5,7 @@ import { MessageForm } from "./MessageForm";
 
 describe("App", () => {
   beforeEach(() => {
-    render(<App />);
-    (fetch as jest.Mock).mockClear();
+    render(<MessageForm onSubmit={jest.fn()} />);
   });
   it("should display a message input with an accessible label", () => {
     screen.getByLabelText("Message");

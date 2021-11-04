@@ -1,7 +1,9 @@
 import { SentMessage, UnsentMessage } from "../types";
 
-export async function getMessages(): Promise<SentMessage[]> {
-  const resp = await fetch("http://localhost:3001/messages");
+export async function getMessages(userId: number): Promise<SentMessage[]> {
+  const resp = await fetch(
+    "http://localhost:3001/messages?recipientUserId=" + userId
+  );
   if (!resp.ok) throw resp;
   return resp.json();
 }
