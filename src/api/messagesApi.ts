@@ -21,3 +21,11 @@ export async function sendMessage(
   if (!resp.ok) throw resp;
   return resp.json();
 }
+
+export async function deleteMessage(id: number) {
+  const resp = await fetch("http://localhost:3001/messages/" + id, {
+    method: "DELETE",
+  });
+  if (!resp.ok) throw resp;
+  return resp.json();
+}

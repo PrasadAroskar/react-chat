@@ -1,13 +1,14 @@
 import Root from "@athena/forge/Root";
 import "@athena/forge/dist/forge.css";
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import List from "@athena/forge/List";
 import ListItem from "@athena/forge/ListItem";
 import { getMessages, sendMessage } from "./api/messagesApi";
 import { SentMessage, UnsentMessage, User } from "./types";
 import { MessageForm } from "./MessageForm";
-import { DevTools } from "./DevTools";
 import { getUsers } from "./api/userApi";
+
+const DevTools = React.lazy(() => import("./DevTools"));
 
 export function App() {
   const [messages, setMessages] = useState<SentMessage[]>([]);
@@ -45,8 +46,11 @@ export function App() {
 
   return (
     <Root>
+      <header style={{ backgroundColor: "limegreen", padding: 14 }}>
+        <h2> Hi, {user.username} </h2>
+      </header>
+
       <h1>Chat</h1>
-      <h2> Hi, {user.username} </h2>
 
       <List>
         {messages.map((m, index) => (
@@ -55,9 +59,17 @@ export function App() {
       </List>
 
       <MessageForm onSubmit={handelSubmit} />
-      {process.env.REACT_APP_SHOW_DEV_TOOLS === "Y" && (
-        <DevTools users={users} setUser={setUser} user={user} />
-      )}
+      <Suspense fallback="loading...">
+        {process.env.REACT_APP_SHOW_DEV_TOOLS === "Y" && (
+          <DevTools
+            users={users}
+            setUser={setUser}
+            user={user}
+            messages={messages}
+            setMessages={setMessages}
+          />
+        )}
+      </Suspense>
     </Root>
   );
 }
