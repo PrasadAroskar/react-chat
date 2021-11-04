@@ -37,7 +37,7 @@ export function App() {
     getInitialData();
   }, [user.id]); // Only run this once.
 
-  async function handelSubmit(unsentMessage: UnsentMessage) {
+  async function handleSubmit(unsentMessage: UnsentMessage) {
     // TODO: Handle loading state. Consider optimistic update.
     const sentMessage = await sendMessage(unsentMessage);
 
@@ -50,7 +50,7 @@ export function App() {
         <h2> Hi, {user.username} </h2>
       </header>
 
-      <section aria-labelleby="chat-heading">
+      <section aria-labelledby="chat-heading" id="chat-section" role="article">
         <h1>Chat</h1>
 
         <List>
@@ -59,7 +59,7 @@ export function App() {
           ))}
         </List>
 
-        <MessageForm onSubmit={handelSubmit} />
+        <MessageForm onSubmit={handleSubmit} />
       </section>
       <Suspense fallback="loading...">
         {process.env.REACT_APP_SHOW_DEV_TOOLS === "Y" && (

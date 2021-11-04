@@ -15,8 +15,10 @@ describe("App", () => {
     // Now, let's change the user
     cy.findByLabelText("Select user").select("coryhouse");
 
-    // Now only Cory's messages should display
-    cy.findByText("Hi Cory, it's Jeff");
+    cy.findByLabelText("chat").within(() => {
+      // Now only Cory's messages should display
+      cy.findByText("Hi Cory, it's Jeff");
+    });
   });
 
   //   To make this atomic:
@@ -25,7 +27,7 @@ describe("App", () => {
   // 3. Remove the message using a HTTP call to the mock
   // 4. Reset the database
 
-  it.only("should support posting a new message", () => {
+  it("should support posting a new message", () => {
     cy.visit("http://localhost:3000");
     cy.findByLabelText("Message").type("Example message");
     cy.findByRole("button", { name: "Send" }).click();
@@ -34,7 +36,9 @@ describe("App", () => {
     // Delete the message that was just created using the dev tools
     cy.findByLabelText("Message to Delete").select("Example message");
 
-    // Now make sure the delete worked. Message shouldn't display anymore
-    cy.findByText("Example message").should("not.exist");
+    cy.findByLabelText("chat").within(() => {
+      // Now make sure the delete worked. Message shouldn't display anymore
+      cy.findByText("Example message").should("not.exist");
+    });
   });
 });
