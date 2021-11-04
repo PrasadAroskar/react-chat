@@ -1,0 +1,21 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "message": "Hi Mark",
+      "date": "2021-11-03",
+      "senderUserId": 1,
+      "recipientUserId": 2
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "prasad"
+    },
+    {
+      "id": 2,
+      "username": "aroskar"
+    }
+  ]
+}
