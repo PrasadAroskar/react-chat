@@ -6,6 +6,13 @@
       "date": "2021-11-03",
       "senderUserId": 1,
       "recipientUserId": 2
+    },
+    {
+      "date": "2021-11-04T14:51:06.696Z",
+      "message": "hi\n",
+      "recipientUserId": 1,
+      "senderUserId": 2,
+      "id": 2
     }
   ],
   "users": [

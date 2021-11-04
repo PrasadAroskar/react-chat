@@ -2,30 +2,19 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { App } from "./App";
 
+(window as any).fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ rates: { CAD: 1.42 } }),
+  })
+);
+
 describe("App", () => {
-  beforeEach(() => render(<App />));
-
-  it("should display a message input with an accessible label", () => {
-    screen.getByLabelText("Message");
+  beforeEach(() => {
+    render(<App />);
+    (fetch as jest.Mock).mockClear();
   });
 
-  it("should render a Submit button with a label of 'Send'", () => {
-    screen.getByRole("button", { name: "Send" });
-  });
-
-  it("should set aria-disabled on the Send button when the Message textarea is empty", () => {
-    const sendButton = screen.getByRole("button", { name: "Send" });
-    expect(sendButton).toHaveAttribute("aria-disabled", "true");
-  });
-
-  it("should NOT disable the Send button when the Message textarea is populated", () => {
-    const sendButton = screen.getByRole("button", { name: "Send" });
-    const messageInput = screen.getByLabelText("Message");
-    userEvent.type(messageInput, "example message");
-    expect(sendButton).toHaveAttribute("aria-disabled", "false");
-  });
-
-  it("should clear out the textarea when submit button is clicked", () => {
+  it.skip("should clear out the textarea when submit button is clicked", () => {
     const sendButton = screen.getByRole("button", { name: "Send" });
     const messageInput = screen.getByLabelText("Message");
     userEvent.type(messageInput, "example message");
@@ -44,8 +33,6 @@ describe("App", () => {
     const sendButton = screen.getByRole("button", { name: "Send" });
     const messageInput = screen.getByLabelText("Message");
     userEvent.type(messageInput, "example message");
-
-    // Clicking this will clear the message input
     userEvent.click(sendButton);
     screen.getByText("example message");
   });
